@@ -1,0 +1,79 @@
+type Query {
+    item(id: ID!): Item!
+    items: [Item!]!
+}
+
+type Mutation {
+    createDish(input: CreateDishInput!): Dish
+    createDrink(input: CreateDrinkInput!): Drink
+    updateDish(input: UpdateInput!): Dish
+    updateDrink(input: UpdateInput!): Drink
+    deleteDish(id: ID!): Dish
+    deleteDrink(id: ID!): Drink
+}
+
+enum DrinkCategories {
+    SOFT_DRINKS
+    COFFEE_AND_TEA
+    DRAFT_CIDER_OR_BEER
+    CIDER
+    BEER
+    APERITIVES
+    VODKA
+    RED_WINE
+    WHITE_WINE
+    ROSE_WINE
+    SPARKLING_WINE
+    GIN
+    TEQUILA
+    RUM
+    COGNAC_AND_BRANDY
+    LIQUOR
+    WHISKEY
+}
+
+enum DishCategories {
+    APPETIZERS_AND_SALADS
+    DESSERT
+    SOUPS
+    CHILDREN_MENU
+    SAUCES
+    MAIN_DISHES
+    STEAKHOUSE
+    SIDE_DISHES
+    SEASON_MENU
+    PIZZA
+}
+
+input CreateDishInput {
+    name: String!
+    category: DishCategories!
+    price: Float!
+}
+
+input CreateDrinkInput {
+    name: String!
+    category: DrinkCategories!
+    price: Float!
+}
+
+input UpdateInput {
+    id: ID!
+    price: Float!
+}
+
+type Dish {
+    id: ID!
+    name: String!
+    category: DishCategories!
+    price: Float!
+}
+
+type Drink {
+    id: ID!
+    name: String!
+    category: DrinkCategories!
+    price: Float!
+}
+
+union Item = Dish | Drink
